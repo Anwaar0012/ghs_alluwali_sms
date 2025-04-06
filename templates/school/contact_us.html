@@ -1,0 +1,77 @@
+{% extends 'school/base.html' %}
+{% load static %}
+
+{% block title %}Contact Us - Ghs Alluwali{% endblock %}
+
+
+{% block school_name_display %}
+
+
+
+{% endblock %}
+{% block below_nav %}
+<div class="jumbotron jumbotron-fluid bg-dark text-white text-center py-5">
+    <div class="container">
+      <h1 class="display-4">Contact Us</h1>
+      <p class="lead">
+        We're here to answer your questions and provide support. Reach out to us today.
+      </p>
+      <hr class="my-4">
+      <p>
+        "The most valuable resource that all teachers have is each other." - Robert John Meehan
+      </p>
+      <p>
+        "Alone we can do so little; together we can do so much." - Helen Keller
+      </p>
+      <a class="btn btn-light btn-lg" href="/" role="button">Get in Touch</a>
+    </div>
+  </div>
+{% endblock below_nav %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 bg-dark">
+            <div class="card shadow-lg bg-dark">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Contact Information</h2>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h4 class="mb-3">Email Address</h4>
+                            <p><a href="mailto:anwaar786786@gmail.com">anwaar786786@gmail.com</a></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="mb-3">Phone Number</h4>
+                            <p>+92 3455353802</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h4 class="mb-3">WhatsApp Numbers</h4>
+                            <p>+92 3455353802</p>
+                            <p>+92 3455409557</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="mb-3">Social Media Links</h4>
+                            <ul class="list-unstyled">
+                                <li><a href="https://web.facebook.com/ghsalluwali?__tn__=%3C" target="_blank">Facebook</a></li>
+                                <li><a href="https://www.twitter.com/ghsalluwali" target="_blank">Twitter</a></li>
+                                <li><a href="https://www.instagram.com/ghsalluwali" target="_blank">Instagram</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 class="mb-3">Address</h4>
+                            <p>Post Office Alluwali,Tehsil Piplan,Distt:Mianwali, Pakistan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

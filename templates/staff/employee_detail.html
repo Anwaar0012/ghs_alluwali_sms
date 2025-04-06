@@ -1,0 +1,66 @@
+{% extends 'staff/base.html' %}
+{% load static %}
+{% block title %}Employee Detail- GHS Alluwali{% endblock %}
+{% block content %}
+<div class="container-fluid mt-2">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            {% if employee.image.url %}
+                                <img src="{{ employee.image.url }}" class="img-fluid rounded-circle mb-3" alt="{{ employee.name }}" style="max-width: 150px;">
+                            {% else %}
+                                <img src="{% static 'img/noimage.jpg' %}" class="img-fluid rounded-circle mb-3" alt="{{ employee.name }}" style="max-width: 150px;">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                            <h2 class="card-title">{{ employee.name }}</h2>
+                            <p class="card-text"><strong>Father's Name:</strong> {{ employee.fname }}</p>
+                            <p class="card-text"><strong>Designation:</strong> {{ employee.designation }}</p>
+                            <p class="card-text"><strong>Scale:</strong> {{ employee.scale }}</p>
+                            <p class="card-text"><strong>Post Status:</strong> {{ employee.post_status }}</p>
+                            <p class="card-text"><strong>Date of Birth:</strong> {{ employee.date_of_birth }}</p>
+                            <p class="card-text"><strong>Gender:</strong> {{ employee.gender }}</p>
+
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="card-text"><strong>CNIC:</strong> {{ employee.cnic }}</p>
+                            <p class="card-text"><strong>Qualification:</strong> {{ employee.qualification }}</p>
+                            <p class="card-text"><strong>Professional Qualification:</strong> {{ employee.prof_qualification }}</p>
+                            <p class="card-text"><strong>Personal Number:</strong> {{ employee.personalno }}</p>
+                            <p class="card-text"><strong>Account Number:</strong> {{ employee.accountno }}</p>
+                            <p class="card-text"><strong>Bank:</strong> {{ employee.bank }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="card-text"><strong>Date of First Joining:</strong> {{ employee.date_of_first_joining }}</p>
+                            <p class="card-text"><strong>Date of Joining Present Scale:</strong> {{ employee.date_of_joining_present_scale }}</p>
+                            <p class="card-text"><strong>Date of Joining Present School:</strong> {{ employee.date_of_joining_present_school }}</p>
+                            <p class="card-text"><strong>Date of Regularization:</strong> {{ employee.date_of_regularization }}</p>
+                            <p class="card-text"><strong>Phone Number:</strong> {{ employee.phoneno }}</p>
+                            <p class="card-text"><strong>Email:</strong> {{ employee.email }}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="card-text"><strong>Address:</strong> {{ employee.address }}</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="{% url 'staff:index' %}" class="btn btn-secondary">Back to Staff List</a>
+                        <button onclick="window.print()" class="btn btn-info ml-2">Print CV</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

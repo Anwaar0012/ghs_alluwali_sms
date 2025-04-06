@@ -1,0 +1,120 @@
+{% extends 'school/base.html' %}
+{% load static %}
+
+{% block title %}About Us - Ghs Alluwali{% endblock %}
+
+{% block school_name_display %}
+    <h1>Information About Ghs Alluwali</h1>
+{% endblock %}
+{% block below_nav %}
+
+
+
+
+{% endblock below_nav %}
+{% comment %} {% block below_nav %}
+
+<div class="jumbotron jumbotron-fluid bg-dark text-center py-5">
+    <div class="container">
+      <h1 class="display-4">About Us</h1>
+      <p class="lead">
+        Discover the heart and soul of our institution. We're dedicated to fostering growth and excellence.
+      </p>
+      <hr class="my-4">
+      <p>
+        "Education is not the filling of a pail, but the lighting of a fire." - W.B. Yeats
+      </p>
+      <p>
+        "The future belongs to those who believe in the beauty of their dreams." - Eleanor Roosevelt
+      </p>
+      <p>
+          "Learning is not attained by chance, it must be sought for with ardor and attended to with diligence." - Abigail Adams
+      </p>
+      <a class="btn btn-primary btn-lg" href="/about-us" role="button">Learn More</a>
+    </div>
+  </div>
+{% endblock below_nav %} {% endcomment %}
+
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-lg bg-dark">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Ghs Alluwali - School Overview</h2>
+                    <p class="card-text">
+                        Ghs Alluwali is a medium-sized government school established in 1950. Located in Post Office Alluwali, it offers classes up to the high school level.
+                    </p>
+
+                    <h4 class="mt-4 mb-3">Information At a Glance</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><strong>Establishment Year:</strong> 1950</li>
+                                <li><strong>EMISCODE EIIN:</strong> 38330027</li>
+                                <li><strong>District:</strong> Mianwali</li>
+                                <li><strong>Tehsil:</strong> Piplan</li>
+                                <li><strong>MARKAZ:</strong> SECONDARY-WING</li>
+                                <li><strong>MOZA:</strong> Alluwali</li>
+                                <li><strong>LOCATION:</strong> Post Office Alluwali</li>
+                                <li><strong>STREET:</strong> Alluwali</li>
+                                <li><strong>UNION:</strong> Alluwali</li>
+                                <li><strong>Geographical Status:</strong> Rural</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><strong>Headmaster:</strong> {{about_us_info.principle_name}}</li>
+                                <li><strong>Headmaster Type:</strong> {{about_us_info.principle_type}}</li>
+                                <li><strong>Medium:</strong> Both</li>
+                                <li><strong>Type:</strong> Male</li>
+                                <li><strong>Management Type:</strong> Govt. School</li>
+                                <li><strong>Level:</strong> High</li>
+                                <li><strong>Total Rooms:</strong> {{about_us_info.total_rooms}}</li>
+                                <li><strong>Classes:</strong> {{about_us_info.classes}}</li>
+                                <li><strong>Sections:</strong> {{about_us_info.sections}}</li>
+                                <li><strong>Enrollment:</strong> {{about_us_info.enrollment}}</li>
+                                <li><strong>Teachers:</strong> {{about_us_info.teachers}}</li>
+                                <li><strong>Non Teaching Staff:</strong> {{about_us_info.non_teaching_staff}}</li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-4 mb-3">Facilities & Resources</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><strong>Openair Class Sections:</strong> 0</li>
+                                <li><strong>Drinking Water Type:</strong> Water Pump</li>
+                                <li><strong>Electricity Source:</strong> Wapda Connection</li>
+                                <li><strong>Total Toilets:</strong> {{about_us_info.wash_rooms}}</li>
+                                <li><strong>Teachers Toilets:</strong> 02</li>
+                                <li><strong>Furniture For Teachers:</strong> {{about_us_info.furniture_teachers}}</li>
+                                <li><strong>Science Lab:</strong> {{about_us_info.science_lab}}</li>
+                                <li><strong>Computer Lab:</strong> {{about_us_info.computer_lab}}</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><strong>Students With Furniture:</strong> {{about_us_info.furniture_students}}</li>
+                                <li><strong>Building Ownership:</strong> Education Department</li>
+                                <li><strong>Construction Type:</strong> Completely Solid</li>
+                                <li><strong>Boundary Wall Status:</strong> Completed</li>
+                                <li><strong>Total Area (Kanal):</strong> {{about_us_info.total_area}} Kanal</li>
+                                <li><strong>Covered Area (Kanal):</strong> {{about_us_info.covered_area}} Kanal</li>
+                                <li><strong>Uncovered Area (Kanal):</strong> {{about_us_info.open_area}} Kanal</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %} 
+
+
+

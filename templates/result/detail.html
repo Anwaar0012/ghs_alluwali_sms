@@ -1,0 +1,193 @@
+{% load static %}
+{% load result_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ student.name }}'s Report Card</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Screen styles (Hidden during printing) */
+        .print-section {
+            display: none; /* Hide the print-section on screen */
+        }
+
+        /* Print styles */
+        @media print {
+            body > *:not(.print-section) {
+                display: none !important;
+            }
+            .print-section {
+                display: block !important;
+                width: 100% !important;
+                padding: 10px !important;
+                font-size: 12px !important;
+            }
+            .school-header {
+                text-align: center;
+                margin-bottom: 10px !important;
+            }
+            .school-logo {
+                height: 70px !important;
+                margin-bottom: 5px !important;
+            }
+            .print-table {
+                width: 100% !important;
+                border-collapse: collapse;
+                margin-top: 10px !important;
+            }
+            .print-table th,
+            .print-table td {
+                border: 1px solid #000 !important;
+                padding: 6px !important;
+                text-align: left;
+                font-size: 11px !important;
+            }
+            .col-subject { width: 25%; }
+            .col-obtained { width: 15%; }
+            .col-total { width: 15%; }
+            .col-percent { width: 20%; }
+            .col-grade { width: 15%; }
+            @page {
+                size: A4 portrait;
+                margin: 10mm;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>{{ student.name }}'s Results</h1>
+            <button onclick="window.print()" class="btn btn-primary">
+                Print Report Card
+            </button>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Student Information</h5>
+                <p class="mb-1"><strong>Class:</strong> {{ student.get_classs_display }}</p>
+                <p class="mb-1"><strong>Roll No:</strong> {{ student.roll_no }}</p>
+            </div>
+        </div>
+
+        {% if results %}
+            {% for result in results %}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        {{ result.get_result_type_display }} - 
+                        {% if result.year %}
+                        {{ result.year }}-{{ result.year|add:"1"|slice:"2:" }}
+                        {% else %}
+                            Year Not Available
+                        {% endif %}
+                    </div>
+                    {% comment %} <div class="card-header">
+                        {{ result.get_result_type_display }} - {{ result.year }}
+                    </div> {% endcomment %}
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Subject</th>
+                                        <th>Marks Obtained</th>
+                                        <th>Total Marks</th>
+                                        <th>Percentage</th>
+                                        <th>Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for subject, marks in result.subjects_config.items %}
+                                        <tr>
+                                            <td>{{ subject|title }}</td>
+                                            <td>{{ marks.obtained }}</td>
+                                            <td>{{ marks.max_marks }}</td>
+                                            <td>{{ marks.obtained|floatformat:2 }}%</td>
+                                            <td>{{ marks.obtained|calculate_grade:marks.max_marks }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot class="table-secondary">
+                                    <tr>
+                                        <th>Grand Total</th>
+                                        <th>{{ result.total_obtained }}</th>
+                                        <th>{{ result.total_marks }}</th>
+                                        <th>{{ result.percentage }}%</th>
+                                        <th>{{ result.grade }}</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% if not forloop.last %}<div style="page-break-after: always;"></div>{% endif %}
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-warning">No results found for this student.</div>
+        {% endif %}
+    </div>
+
+    <div class="print-section">
+        <div class="school-header">
+            <img src="{% static 'images/school_logo.png' %}" alt="School Logo" class="school-logo">
+            <h2>Govt High School Alluwali</h2>
+            <h4>
+                {% if results %}
+                    {{ results.0.get_result_type_display }} Exam {{ results.0.year }}
+                {% endif %}
+            </h4>
+        </div>
+
+        <div class="student-info" style="margin: 10px 0;">
+            <div style="display: flex;">
+                <div style="width: 50%; padding-right: 10px;">
+                    <p style="margin: 2px 0;"><strong>Student Name:</strong> {{ student.name }}</p>
+                    <p style="margin: 2px 0;"><strong>Father's Name:</strong> {{ student.father_name }}</p>
+                </div>
+                <div style="width: 50%; padding-left: 10px;">
+                    <p style="margin: 2px 0;"><strong>Class:</strong> {{ student.get_classs_display }}</p>
+                    <p style="margin: 2px 0;"><strong>Roll No:</strong> {{ student.roll_no }}</p>
+                </div>
+            </div>
+        </div>
+
+        {% if results %}
+            {% for result in results %}
+                <table class="print-table">
+                    <thead>
+                        <tr>
+                            <th class="col-subject">Subject</th>
+                            <th class="col-obtained">Obtained</th>
+                            <th class="col-total">Total</th>
+                            <th class="col-percent">Percentage</th>
+                            <th class="col-grade">Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for subject, marks in result.subjects_config.items %}
+                            <tr>
+                                <td>{{ subject|title }}</td>
+                                <td>{{ marks.obtained }}</td>
+                                <td>{{ marks.max_marks }}</td>
+                                <td>{{ marks.obtained|floatformat:2 }}%</td>
+                                <td>{{ marks.obtained|calculate_grade:marks.max_marks }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Grand Total</th>
+                            <th>{{ result.total_obtained }}</th>
+                            <th>{{ result.total_marks }}</th>
+                            <th>{{ result.percentage }}%</th>
+                            <th>{{ result.grade }}</th>
+                        </tr>
+                    </tfoot>
+                </table>
+                {% if not forloop.last %}<div style="page-break-after: always;"></div>{% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>

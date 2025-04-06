@@ -1,0 +1,92 @@
+<!-- templates/results/class_results.html -->
+{% extends "result/base.html" %}
+{% block title %}GHS Alluwali Result-Class Result{% endblock %}
+{% block css %}{% endblock css %}
+{% comment %} {% block custom_css %} {% endblock %} {% block extra_head %}{% endblock %} {% endcomment %}
+{% comment %} {% block resultactive %}active{% endblock resultactive %} {% endcomment %}
+{% block content %}
+    <div class="container mt-4">
+        <h2>Class Results</h2>
+        
+        <!-- Filter Form -->
+        <form method="get" class="mb-4 bg-light p-3 rounded">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">Level</label>
+                    <select name="level" class="form-select">
+                        {% for value, name in LEVEL_CHOICES %}
+                            <option value="{{ value }}" {% if value == level %}selected{% endif %}>{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Class</label>
+                    <select name="classs" class="form-select">
+                        {% for value, name in CLASS_CHOICES %}
+                            <option value="{{ value }}" {% if value == classs %}selected{% endif %}>{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Result Type</label>
+                    <select name="result_type" class="form-select">
+                        {% for value, name in RESULT_TYPE_CHOICES %}
+                            <option value="{{ value }}" {% if value == result_type %}selected{% endif %}>{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Year</label>
+                    <input type="number" name="year" value="{{ year }}" class="form-control" min="2000" max="2100">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Filter</button>
+        </form>
+        <!-- Results Table -->
+        {% if students %}
+            <div class="mb-3">
+                <a href="?{{ request.GET.urlencode }}&export=excel" class="btn btn-success">
+                    Export Excel
+                </a>
+                <a href="?{{ request.GET.urlencode }}&export=pdf" class="btn btn-danger">
+                    Export PDF
+                </a>
+            </div>
+
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Father's Name</th>
+                        <th>Roll No</th>
+                        <th>Class</th>
+                        <th>Total Marks</th>
+                        <th>Percentage</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student, result in students %}
+                        <tr>
+                            <td>{{ student.name }}</td>
+                            <td>{{ student.father_name }}</td>
+                            <td>{{ student.roll_no }}</td>
+                            <td>{{ student.get_classs_display }}</td>
+                            {% if result %}
+                                <td>{{ result.total_obtained }}</td>
+                                <td>{{ result.percentage }}%</td>
+                                <td>{{ result.grade }}</td>
+                            {% else %}
+                                <td colspan="3" class="text-danger">Result Not Found</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="alert alert-warning">
+                No results found for the selected filters.
+            </div>
+        {% endif %}
+    </div>
+    {% endblock %}

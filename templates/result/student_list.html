@@ -1,0 +1,77 @@
+{% extends "result/base.html" %}
+{% block title %}GHS Alluwali Students{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Student List</h2>
+    
+    <!-- Filter Form -->
+    <form method="get" class="mb-4 bg-light p-3 rounded">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <label class="form-label">Level</label>
+                <select name="level" class="form-select">
+                    <option value="">All Levels</option>
+                    {% for value, name in LEVEL_CHOICES %}
+                        <option value="{{ value }}" {% if value == selected_level %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Class</label>
+                <select name="classs" class="form-select">
+                    <option value="">All Classes</option>
+                    {% for value, name in CLASS_CHOICES %}
+                        <option value="{{ value }}" {% if value == selected_class %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3 align-self-end">
+                <button type="submit" class="btn btn-primary w-100">Filter</button>
+            </div>
+        </div>
+    </form>
+
+    {% if filters_applied %}
+        <!-- Export and Results Section -->
+        <div class="mb-3">
+            <a href="?{{ request.GET.urlencode }}&export=excel" class="btn btn-success">
+                Export Excel
+            </a>
+        </div>
+
+        {% if students %}
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Father's Name</th>
+                        <th>Roll No</th>
+                        <th>Class</th>
+                        <th>Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.father_name }}</td>
+                        <td>{{ student.roll_no }}</td>
+                        <td>{{ student.get_classs_display }}</td>
+                        <td>{{ student.get_level_display }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="alert alert-warning">
+                No students found matching the filters.
+            </div>
+        {% endif %}
+    {% else %}
+        <!-- Initial State Message -->
+        <div class="alert alert-info">
+            Please select filters to view student records.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

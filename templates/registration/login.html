@@ -1,0 +1,23 @@
+{% extends 'school/base.html' %}
+{% load static %}
+{% load static %}  {% block title %}Login{% endblock %}
+{% block school_name_display %}
+    <h1 class="white-bold">Govt.High School Alluwali - Log in</h1>
+{% endblock %}
+{% block content %}
+    <div class="container mt-5 d-flex justify-content-center align-items-center" style="min-height: 50vh;">
+        <div class="col-md-6 text-center">
+            <img src="{% static 'images/school_logo.png' %}" alt="Logo" class="img-fluid mb-1" style="width: 100px; height: 100px;"> 
+            <h2 class="white-bold">Login</h2>
+            {% if form.errors %}
+                <p style="color: orange;">Your username and password didn't match. Please try again.</p>
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Login</button>
+                <input type="hidden" name="next" value="{{ next }}">
+            </form>
+        </div>
+    </div>
+{% endblock %}

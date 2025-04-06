@@ -1,0 +1,63 @@
+{% extends "result/base.html" %}
+{% load static %}
+
+{% block title %}GHS Alluwali Search : Result {% endblock %}
+{%block css %}{% endblock css %}
+{% block custom_css %} {% endblock %}
+{% block extra_head %}{% endblock %}
+{% block content %}
+<h1>Find Your Result</h1>
+<form method="post">
+    {% csrf_token %}
+    <label>
+        Level:
+        <select name="level" required>
+            <option value="" selected disabled>Select Level</option>
+            <option value="primary">Primary</option>
+            <option value="middle">Middle</option>
+            <option value="high">High</option>
+        </select>
+    </label>
+    <label>
+        Class:
+        <select name="classs" required>
+            <option value="" selected disabled>Select Class</option>
+            <option value="ECCE">ECCE</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6IQBAL">6IQBAL</option>
+            <option value="6QUAID">6QUAID</option>
+            <option value="7IQBAL">7IQBAL</option>
+            <option value="7QUAID">7QUAID</option>
+            <option value="8IQBAL">8IQBAL</option>
+            <option value="8QUAID">8QUAID</option>
+            <option value="9IQBAL">9IQBAL</option>
+            <option value="9QUAID">9QUAID</option>
+            <option value="10IQBAL">10IQBAL</option>
+            <option value="10QUAID">10QUAID</option>
+        </select>
+    </label>
+    <label>
+        Roll Number:
+        <input type="text" name="roll_no" required />
+    </label>
+    <label>
+        Result Type:
+        <select name="result_type" required>
+            <option value="" selected disabled>Select Result Type</option>
+            <option value="annual">Annual</option>
+            <option value="first_term">First Term</option>
+            <option value="second_term">Second Term</option>
+            <option value="final_term">Final Term</option>
+        </select>
+    </label>
+    <button type="submit">Search</button>
+</form>
+{% for result in middleresult %}
+{{result.student.name}}
+{{result.student.classs}}
+{% endfor %}
+{% endblock %}

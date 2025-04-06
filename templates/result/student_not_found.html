@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Not Found</title>
+    <!-- Bootstrap CSS for quick styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .error-card {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            background: white;
+        }
+        .error-icon {
+            font-size: 4rem;
+            color: #dc3545;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-card">
+            <div class="text-center">
+                <!-- Error Icon -->
+                <div class="error-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-person-x-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </div>
+
+                <!-- Error Message -->
+                <h1 class="h2 mb-3 text-danger">Student Not Found</h1>
+                <p class="lead mb-4">
+                    No student found with the following details:
+                </p>
+
+                <!-- Search Details -->
+                <div class="card mb-4 border-danger">
+                    <div class="card-body text-start">
+                        <p class="mb-2"><strong>Level:</strong> {{ level }}</p>
+                        <p class="mb-2"><strong>Class:</strong> {{ classs }}</p>
+                        <p class="mb-0"><strong>Roll No:</strong> {{ roll_no }}</p>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-grid gap-3">
+                    <a href="{% url 'result:result-search' %}" class="btn btn-danger btn-lg">
+                        Try Search Again
+                    </a>
+                    <a href="/" class="btn btn-outline-secondary btn-lg">
+                        Return to Home
+                    </a>
+                </div>
+
+                <!-- Help Text -->
+                <p class="mt-4 text-muted small">
+                    If this seems incorrect, please verify the details or contact support.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

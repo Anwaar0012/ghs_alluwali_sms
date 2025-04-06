@@ -1,0 +1,64 @@
+{% extends "result/base.html" %}
+{% block title %}GHS Alluwali - Result:Home{% endblock %}
+{% block css %}{% endblock css %}
+{% block content %}
+<div class="container">
+    <h2 class=""style="color:orange; font-weight:bold; font-size:30px;">Students Summary Report</h2>
+    
+    <div class="card shadow mb-4">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0" >Students by Level and Class</h4>
+        </div>
+        
+        <div class="card-body">
+            {% for level in summary %}
+            <div class="level-section mb-5">
+                <h3 class="h5 mb-3 text-secondary">
+                    <i class="fas fa-layer-group me-2"></i>
+                    {{ level.level_name }} Level
+                </h3>
+                
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Class</th>
+                                <th>Number of Students</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for class_name, count in level.classes %}
+                            <tr>
+                                <td>{{ class_name }}</td>
+                                <td>{{ count }}</td>
+                            </tr>
+                            {% endfor %}
+                            <tr class="table-info">
+                                <td><strong>Total {{ level.level_name }}</strong></td>
+                                <td><strong>{{ level.total }}</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="total-section mt-4 p-3 bg-light rounded">
+                <h4 class="mb-0">
+                    Grand Total Students: 
+                    <span class="badge bg-primary">
+                        {{ grand_total }}  <!-- Changed this line -->
+                    </span>
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
