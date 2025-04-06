@@ -1,0 +1,8 @@
+Downloading django_filter-25.1-py3-none-any.whl (94 kB)
+Installing collected packages: django-filter, django-bootstrap5
+Successfully installed django-bootstrap5-25.1 django-filter-25.1
+PS E:\NewDjangoProjects\Final\ghs_alluwali_sms> pip install django-bootstrap5 django-filter openpyxl
+panda
+pip install openpyxl django-extensions
+from openpyxl.styles import PatternFill
+python manage.py collectstatic
